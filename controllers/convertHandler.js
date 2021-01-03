@@ -17,9 +17,7 @@ function ConvertHandler() {
         if (i==0){
           return result;
         }
-        
         result = input.slice(0,i);
-        //console.log(typeof(result))
         if (result.includes('/')){
           for (let j=0;j<result.length;j++){
             if(result[j]=='/'){
@@ -30,14 +28,14 @@ function ConvertHandler() {
         if (isNaN(result)){
           return "error"
         } else {
-          return result;  
+          return result*1;  
         }
       }
     }
     if (isNaN(result)){
       return "error"
     } else {
-      return result;  
+      return result*1;  
     }
   };
   
@@ -50,12 +48,12 @@ function ConvertHandler() {
         if (this.getReturnUnit(result)=="error"){
           return "error";
         }
+        result = result.toLowerCase() == 'l'? 'L': result.toLowerCase();
         return result;
       } else if (i==input.length-1){
         return "error"; // no unit given
       }
     }
-    
     return result;
   };
   
@@ -140,7 +138,7 @@ function ConvertHandler() {
       default:
         result = "error";
     }
-    return result.toFixed(5);
+    return result.toFixed(5)*1;
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
