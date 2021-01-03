@@ -12,6 +12,12 @@ const runner            = require('./test-runner');
 
 let app = express();
 
+// Request Logger
+app.use((req, res, next) => {
+  console.log(req.method + " " + req.path + " - " + req.ip);
+  next();
+})
+
 app.use('/public', express.static(process.cwd() + '/public'));
 
 app.use(cors({origin: '*'})); //For FCC testing purposes only
@@ -30,13 +36,16 @@ fccTestingRoutes(app);
 
 //Routing for API 
 apiRoutes(app);  
-    
+
+/*    
 //404 Not Found Middleware
 app.use(function(req, res, next) {
   res.status(404)
     .type('text')
     .send('Not Found');
 });
+*/
+
 
 //Start our server and tests!
 app.listen(process.env.PORT || 3000, function () {
@@ -55,4 +64,9 @@ app.listen(process.env.PORT || 3000, function () {
   }
 });
 
+
 module.exports = app; //for testing
+
+// 1 gal to 3.78541 L
+// 1 lbs to 0.453592 kg
+// 1 mi to 1.60934 km
